@@ -23,8 +23,11 @@ if (!isset($_ENV["TOKEN"])) {
     renderOutput($message, 500);
 }
 
-// set cache to refresh once per day (24 hours)
+// set cache to refresh once per day (24 hours) or based on query parameter
 $cacheSeconds = CACHE_DURATION;
+if (isset($_GET["cache_seconds"])) {
+    $cacheSeconds = intval($_GET["cache_seconds"]);
+}
 header("Expires: " . gmdate("D, d M Y H:i:s", time() + $cacheSeconds) . " GMT");
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 header("Cache-Control: public, max-age=$cacheSeconds");

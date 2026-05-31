@@ -3,6 +3,7 @@
         { "handle": "filesystem" },
         { "src": "/demo/?", "dest": "/api/demo/index.php" },
         { "src": "/demo/(.+)", "dest": "/api/demo/vercel-static.php" },
+        { "src": "/snake/?", "dest": "/api/snake.php" },
         { "src": "/", "dest": "/api/index.php" }
     ],
     "functions": {

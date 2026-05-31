@@ -8,8 +8,14 @@ declare(strict_types=1);
  * Caches stats for 24 hours to avoid repeated API calls
  */
 
-// Default cache duration: 24 hours (in seconds)
-define("CACHE_DURATION", 24 * 60 * 60);
+// Cache duration: check environment variable (CACHE_SECONDS), otherwise default to 2 hours (7200 seconds)
+$envCacheDuration = 7200;
+if (isset($_SERVER["CACHE_SECONDS"])) {
+    $envCacheDuration = intval($_SERVER["CACHE_SECONDS"]);
+} elseif (isset($_ENV["CACHE_SECONDS"])) {
+    $envCacheDuration = intval($_ENV["CACHE_SECONDS"]);
+}
+define("CACHE_DURATION", $envCacheDuration);
 define("CACHE_DIR", "/tmp/cache");
 
 /**
